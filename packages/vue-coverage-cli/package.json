@@ -1,0 +1,22 @@
+{
+  "name": "@tool-123/vue-test-cli",
+  "version": "0.0.0",
+  "description": "auto generate file by specific file",
+  "author": "向军 <xiangjun02@longfor.com> (xiangjun02)",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/vue-coverage-cli.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmmirror.com/"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  }
+}
