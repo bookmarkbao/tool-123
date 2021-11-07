@@ -1,5 +1,5 @@
 {
-  "name": "@tool-123/gen-tpl-cli",
+  "name": "@tool-123/gt-cli",
   "version": "0.0.0",
   "description": "jest test generate tpl",
   "author": "daxiang <bookmarkbao@gmail.com>",
