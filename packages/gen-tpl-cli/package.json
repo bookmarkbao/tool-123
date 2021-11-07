@@ -11,6 +11,9 @@
     "watch": "rm -rf dist && npm run gulp build --watch",
     "prepublish": "npm run build"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist"
   ],
