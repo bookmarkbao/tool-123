@@ -89,5 +89,6 @@
       "esm",
       "esbuild-register"
     ]
-  }
+  },
+  "gitHead": "aca2fcc53440041264885cdd2f0ab805d23b4bc0"
 }
