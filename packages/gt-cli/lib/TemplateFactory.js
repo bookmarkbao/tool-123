@@ -1,5 +1,4 @@
-import ComponentTpl from './templates/ComponentTpl';
-import DirectiveTpl from './templates/DirectiveTpl';
+import SpecTpl from './templates/SpecTpl';
 import SingleTpl from './templates/SingleTpl';
 import TemplateGenerator from './TemplateGenerator';
 
@@ -13,24 +12,15 @@ class TemplateFactory {
    * @param cli options
    */
   static createTemplateFor( cli ) {
-
     /**
-     * Generate Vue 2 component
+     * Generate all specs files
      */
-    if( cli.component ) {
-   
-      return new TemplateGenerator(new ComponentTpl(cli.component, cli.postfix));
+    if( cli.gen ) {
+      return new TemplateGenerator(new SpecTpl(cli.gen, cli.postfix));
     }
 
     /**
-     * Generate Vue 2 directive
-     */
-    if( cli.directive ) {
-      return new TemplateGenerator(new DirectiveTpl(cli.directive));
-    }
-
-    /**
-     * Generate Vue 2 single file component
+     * Generate spec single file component
      */
     if( cli.single ) {
       return new TemplateGenerator(new SingleTpl(cli.single, cli.folder));

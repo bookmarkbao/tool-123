@@ -4,7 +4,7 @@ import swig from 'swig';
 import fs from 'fs-extra';
 import config from './config/config';
 const log = (...arg)=>{
-  console.log(chalk.green(arg.slice(0,1)),chalk.blue(arg.slice(1)))
+  console.log(chalk.blue(arg.slice(0,1)),chalk.blue(arg.slice(1)))
 }
 const logObj = console.log
 /**
@@ -17,10 +17,8 @@ class TemplateGenerator {
    * @param options
    */
   constructor( options ) {
-    logObj(99999, options)
     // 定位到目录
     this.TEMPLATES_DIR = `${__dirname}/blueprints`;
-    log('__dirname',this.TEMPLATES_DIR)
     this._create(options);
   }
 
@@ -37,6 +35,7 @@ class TemplateGenerator {
     if( options.isDir ) { 
       this._createDirectory(this._getDirPath(type), { name, actions, filesType, postfix }, filesType);
     } else {
+      log('创建完成',`${name}.spec.js`)
       const tpl = this._compileTpl(this._getSingleTpl(type), { name, actions, filesType });
       this._createFile(name, type, filesType.script, tpl);
     }
@@ -51,8 +50,8 @@ class TemplateGenerator {
    */
   _compileTpl( file, { name, actions, filesType } ) {
     const compiled = swig.compileFile(file);
-    const componentName = name.substring(name.lastIndexOf("/") + 1);
-    return compiled({ name: componentName, actions, filesType });
+    const specName = name.substring(name.lastIndexOf("/") + 1);
+    return compiled({ name: specName, actions, filesType });
   }
 
   /**
@@ -64,10 +63,7 @@ class TemplateGenerator {
    * @private
    */
   _createFile( name, type, fileType, tpl ) {
-    let fileName = this._createFilePath(name, type, fileType)
-    log('_createFile: name, type, fileType', name, type, fileType)
-    log('fileName', fileName)
-    fs.outputFile(fileName, tpl, function( err ) {
+    fs.outputFile(this._createFilePath(name, type, fileType), tpl, function( err ) {
       if( err ) console.log(err);
     });
   }
@@ -80,16 +76,17 @@ class TemplateGenerator {
    * @private
    */
   _createDirectory( dirPath, data, fileTypes ) {
+
     fs.readdir(dirPath, ( err, dir ) => {
       const name = data.name;
       const folder = path.join(process.cwd(), name);
       let filePath;
-
       dir.forEach(tempFile => {
         const compiled = this._compileTpl(`${dirPath}/${tempFile}`, data);
         let fileName = this._createFileName(tempFile, name, fileTypes, data.postfix);
 
         filePath = path.join(folder, fileName);
+        log('创建完成',fileName)
 
         fs.outputFile(filePath, compiled, function( err ) {
           if( err ) console.log(err);

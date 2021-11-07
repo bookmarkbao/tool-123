@@ -1,5 +1,6 @@
 export default [{
     name: 'help',
+    alias: 'h',
     type: Boolean,
     group: "options",
     description: 'help'
