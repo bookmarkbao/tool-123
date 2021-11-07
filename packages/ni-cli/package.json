@@ -1,6 +1,6 @@
 {
   "name": "@tool-123/ni-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Use the right package manager",
   "license": "MIT",
   "repository": {
