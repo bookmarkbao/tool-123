@@ -1,6 +1,6 @@
 {
   "name": "@tool-123/ni-cli",
-  "version": "0.10.0",
+  "version": "0.0.3",
   "description": "Use the right package manager",
   "license": "MIT",
   "repository": {
@@ -12,6 +12,9 @@
     "dist",
     "bin"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -22,7 +25,8 @@
     "nu": "bin/nu.js",
     "nx": "bin/nx.js",
     "nrm": "bin/nrm.js",
-    "test": "bin/test.js"
+    "test": "bin/test.js",
+    "testTpl": "bin/tpl.js"
   },
   "bugs": {
     "url": "https://github.com/bookmarkbao/tool-123.git/issues"
@@ -30,6 +34,7 @@
   "homepage": "https://github.com/bookmarkbao/tool-123.git#readme",
   "scripts": {
     "prepublishOnly": "rimraf dist && npm run build",
+    "watch:tpl": "npm run build:tpl -- --watch",
     "watch": "npm run build -- --watch",
     "?ni": "npm install",
     "ni": "esno src/ni.ts",
@@ -39,8 +44,10 @@
     "nx": "esno src/nx.ts",
     "nrm": "esno src/nrm.ts",
     "t123": "esno src/test.ts",
+    "tpl": "esno src/tpl.ts",
     "dev": "esno src/ni.ts",
-    "build": "rimraf dist && tsup src/ni.ts src/nci.ts src/nr.ts src/nu.ts src/nx.ts src/nrm.ts src/index.ts src/test.ts --format cjs,esm --dts",
+    "build:tpl": "rimraf dist/tpl* && tsup src/tpl.ts --format cjs,esm --dts",
+    "build": "rimraf dist && tsup src/ni.ts src/nci.ts src/nr.ts src/nu.ts src/nx.ts src/nrm.ts src/index.ts src/test.ts src/tpl.ts --format cjs,esm --dts",
     "release": "npx git-ensure && npx bumpp --commit --push --tag",
     "lint": "eslint \"**/*.ts\"",
     "lint:fix": "npm run lint -- --fix",
@@ -53,16 +60,21 @@
     "@types/prompts": "^2.4.0",
     "ava": "^3.15.0",
     "c8": "^7.8.0",
+    "chalk": "^4.1.2",
     "esbuild-register": "^3.0.0",
     "eslint": "^7.32.0",
     "esm": "^3.2.25",
     "esno": "^0.9.1",
     "execa": "^5.1.1",
     "find-up": "^5.0.0",
+    "fs-extra": "^10.0.0",
     "ini": "^2.0.0",
+    "nodemon": "^2.0.14",
     "prompts": "^2.4.1",
     "rimraf": "^3.0.2",
+    "swig": "^1.4.2",
     "terminal-link": "^3.0.0",
+    "ts-node": "^10.4.0",
     "tsup": "^4.14.0",
     "typescript": "^4.4.2"
   },
@@ -77,5 +89,6 @@
       "esm",
       "esbuild-register"
     ]
-  }
+  },
+  "gitHead": "aca2fcc53440041264885cdd2f0ab805d23b4bc0"
 }
